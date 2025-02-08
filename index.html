@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chocolate Day for Yubhashna 🍫❤️</title>
+    <style>
+        body {
+            background: #4b2e2e;
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: #603c3c;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #ffd700;
+            font-size: 32px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .chocolate-box {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        .choco-piece {
+            width: 80px;
+            height: 80px;
+            background: #d2691e;
+            margin: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+        .choco-piece:hover {
+            background: #a0522d;
+        }
+        #movingChoco {
+            position: absolute;
+        }
+        #chocoMessage {
+            display: none;
+            margin-top: 20px;
+            background: #8b4513;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Happy Chocolate Day, Yubhashna! 🍫❤️</h1>
+        <p>Since I can't give you chocolates in person, here’s a virtual chocolate box filled with sweet messages just for you!</p>
+        <div class="chocolate-box">
+            <div class="choco-piece" onclick="showMessage(0)">🍫</div>
+            <div class="choco-piece" onclick="showMessage(1)">🍫</div>
+            <div class="choco-piece" onclick="showMessage(2)">🍫</div>
+            <div class="choco-piece" id="movingChoco" onclick="catchChocolate()">🍫</div>
+        </div>
+        <p id="chocoMessage">Oops! You caught the chocolate! 🍫💖 I'm really sorry for everything. Forgive me? 💕</p>
+    </div>
+
+    <script>
+        const messages = [
+            "Just like chocolate, you make my life sweeter! 🍫❤️",
+            "Every moment with you is as delightful as my favorite chocolate! 😊",
+            "You are the reason behind my happiest smiles! 💕",
+            "I wish I could give you all the chocolates in the world! 🍫🥰"
+        ];
+        
+        function showMessage(index) {
+            document.getElementById("chocoMessage").innerText = messages[index];
+            document.getElementById("chocoMessage").style.display = "block";
+        }
+        
+        function moveChocolate() {
+            const choco = document.getElementById("movingChoco");
+            if (!choco.classList.contains("stopped")) {
+                const box = document.querySelector(".chocolate-box");
+                const maxX = box.clientWidth - choco.clientWidth;
+                const maxY = box.clientHeight - choco.clientHeight;
+                
+                const randomX = Math.floor(Math.random() * maxX);
+                const randomY = Math.floor(Math.random() * maxY);
+                
+                choco.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            }
+        }
+        
+        function catchChocolate() {
+            clearInterval(moveInterval);
+            document.getElementById("movingChoco").classList.add("stopped");
+            document.getElementById("chocoMessage").innerText = "Oops! You caught the chocolate! 🍫💖 I'm really sorry for everything. Forgive me? 💕";
+            document.getElementById("chocoMessage").style.display = "block";
+        }
+        
+        let moveInterval = setInterval(moveChocolate, 1000);
+    </script>
+</body>
+</html>
